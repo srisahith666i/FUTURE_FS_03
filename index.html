@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthCare Clinic</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --background: #FDFBF7;
+      --foreground: #1C2522;
+      --primary: #2C5545;
+      --primary-light: #3b6b58;
+      --secondary: #E8F3F1;
+      --muted: #F0ECE6;
+      --muted-foreground: #6D7B76;
+      --accent: #F3EEE7;
+      --border: #E7E1D9;
+      --destructive: #C85A44;
+      --white: #ffffff;
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.04);
+      --shadow-hover: 0 18px 40px rgba(0,0,0,0.08);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1280px;
+      margin: auto;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .overline {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #0f5a54;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--muted-foreground);
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 30px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-emergency {
+      background: var(--destructive);
+      color: white;
+    }
+
+    .btn-light {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-light:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(253, 251, 247, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(231, 225, 217, 0.7);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-circle {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .logo-text h2 {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .logo-text p {
+      color: var(--muted-foreground);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+    }
+
+    nav ul li a {
+      font-size: 17px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.3rem, 6vw, 5.5rem);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      max-width: 580px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--muted-foreground);
+      margin-top: 30px;
+      max-width: 650px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      border-radius: var(--radius-xl);
+      min-height: 420px;
+      max-height: 620px;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* SERVICES */
+    .services {
+      background: rgba(240, 236, 230, 0.45);
+    }
+
+    .section-center {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 70px;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 34px;
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .icon-box {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      background: var(--secondary);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 28px;
+    }
+
+    .service-card h3 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .service-card p {
+      color: var(--muted-foreground);
+      font-size: 17px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-image {
+      border-radius: var(--radius-xl);
+      min-height: 520px;
+      max-height: 620px;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .feature-list {
+      margin-top: 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .feature-item .icon-box {
+      width: 58px;
+      height: 58px;
+      font-size: 22px;
+      border-radius: 16px;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .feature-item h4 {
+      font-size: 1.8rem;
+    }
+
+    .feature-item p {
+      color: var(--muted-foreground);
+      font-size: 17px;
+    }
+
+    /* GALLERY */
+    .gallery {
+      background: rgba(232, 243, 241, 0.55);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 22px;
+      margin-top: 70px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gallery-item img {
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-1 { grid-column: span 5; grid-row: span 2; min-height: 480px; }
+    .gallery-2 { grid-column: span 3; min-height: 230px; }
+    .gallery-3 { grid-column: span 4; min-height: 230px; }
+    .gallery-4 { grid-column: span 3; min-height: 230px; }
+    .gallery-5 { grid-column: span 4; min-height: 230px; }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      background: var(--background);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 70px;
+    }
+
+    .testimonial-card {
+      background: rgba(243, 238, 231, 0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 34px;
+    }
+
+    .stars {
+      color: #b48a3d;
+      margin-bottom: 22px;
+    }
+
+    .testimonial-card p.quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      line-height: 1.45;
+    }
+
+    .testimonial-card p.name {
+      margin-top: 24px;
+      color: var(--muted-foreground);
+      font-size: 17px;
+    }
+
+    /* APPOINTMENT */
+    .appointment {
+      background: rgba(232, 243, 241, 0.7);
+    }
+
+    .appointment-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .info-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      display: flex;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .info-card h4 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      color: var(--muted-foreground);
+      font-size: 17px;
+    }
+
+    .appointment-form {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 38px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1px solid var(--border);
+      background: var(--background);
+      border-radius: 999px;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-group textarea {
+      border-radius: 24px;
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(44, 85, 69, 0.12);
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 26px;
+      padding: 18px;
+      font-size: 18px;
+    }
+
+    /* EMERGENCY */
+    .emergency {
+      background: var(--primary);
+      color: white;
+    }
+
+    .emergency-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .emergency h2,
+    .emergency .overline {
+      color: white;
+    }
+
+    .emergency p {
+      color: rgba(255,255,255,0.78);
+      font-size: 18px;
+      margin-top: 24px;
+      max-width: 620px;
+    }
+
+    .emergency-buttons {
+      display: flex;
+      gap: 18px;
+      margin-top: 34px;
+      flex-wrap: wrap;
+    }
+
+    .map-card {
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      min-height: 360px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .map-card iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: 0;
+      display: block;
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(135deg, #183126, #0f1f18);
+      color: white;
+      padding: 80px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .footer-grid h3 {
+      color: white;
+      font-size: 2.3rem;
+    }
+
+    .footer-grid h4 {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-grid p,
+    .footer-grid li,
+    .footer-grid a {
+      color: rgba(255,255,255,0.75);
+      font-size: 17px;
+      transition: var(--transition);
+    }
+
+    .footer-grid a:hover {
+      color: white;
+    }
+
+    .footer-grid ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .socials a {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 18px;
+    }
+
+    .socials a:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      margin-top: 60px;
+      padding-top: 26px;
+      text-align: center;
+      color: rgba(255,255,255,0.65);
+      font-size: 15px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .about-grid,
+      .appointment-grid,
+      .emergency-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-1,
+      .gallery-2,
+      .gallery-3,
+      .gallery-4,
+      .gallery-5 {
+        grid-column: span 1;
+        min-height: 260px;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 80px 0;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 84px;
+        left: 0;
+        width: 100%;
+        background: var(--background);
+        border-top: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+      }
+
+      nav.active {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        padding: 24px;
+        gap: 18px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .desktop-book {
+        display: none;
+      }
+
+      .services-grid,
+      .testimonials-grid,
+      .form-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+
+      .hero h1 {
+        font-size: 3.3rem;
+      }
+
+      .section-title {
+        font-size: 2.8rem;
+      }
+
+      .hero-image,
+      .about-image {
+        min-height: 320px;
+        max-height: 80vh;
+      }
+
+      .logo-text h2 {
+        font-size: 1.7rem;
+      }
+
+      .appointment-form {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container navbar">
+      <a href="#home" class="logo">
+        <div class="logo-circle">H</div>
+        <div class="logo-text">
+          <h2>HealthCare Clinic</h2>
+          <p>Your Wellness Partner</p>
+        </div>
+      </a>
+
+      <nav id="navMenu">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a href="#appointment" class="btn btn-primary desktop-book">
+        <i class="fa-regular fa-calendar"></i> Book Now
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero section" id="home">
+    <div class="container hero-grid">
+      <div>
+        <p class="overline">Premium Healthcare Services</p>
+        <h1>Your Health,<br>Our Priority</h1>
+        <p>
+          Experience world-class medical care with our team of expert doctors
+          and state-of-the-art facilities. We’re committed to providing
+          compassionate, personalized healthcare for you and your family.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#appointment" class="btn btn-primary">Book Appointment</a>
+          <a href="https://wa.me/919999999999" target="_blank" class="btn btn-outline">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="https://static.prod-images.emergentagent.com/jobs/028954cc-8890-4246-bb26-8e17e8340b0f/images/49f20c29ef47b9510ec03ea74db5a712352d98b899371d67a72922012963db63.png"
+          alt="Clinic reception"
+          class="hero-image"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section-center">
+        <p class="overline">Medical Expertise</p>
+        <h2 class="section-title">Our Medical Services</h2>
+        <p class="section-subtitle">
+          Comprehensive healthcare solutions tailored to your needs
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-stethoscope"></i></div>
+          <h3>General Consultation</h3>
+          <p>Comprehensive health check-ups and personalized consultations with experienced physicians.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3>Cardiology</h3>
+          <p>Advanced cardiac care with modern diagnostic support and patient-focused treatment plans.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-syringe"></i></div>
+          <h3>Vaccination</h3>
+          <p>Complete immunization services for children, adults, and senior citizens.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-shield-heart"></i></div>
+          <h3>Preventive Care</h3>
+          <p>Early screenings, wellness plans, and preventive services for lifelong health.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-users"></i></div>
+          <h3>Family Medicine</h3>
+          <p>Trusted healthcare for every stage of life with compassionate family-centered care.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-regular fa-calendar-days"></i></div>
+          <h3>Diagnostic Services</h3>
+          <p>Reliable testing and health assessments with efficient scheduling and reporting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="container about-grid">
+      <div>
+        <img
+          src="https://images.pexels.com/photos/6762866/pexels-photo-6762866.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+          alt="Doctor"
+          class="about-image"
+        />
+      </div>
+
+      <div>
+        <p class="overline">About Us</p>
+        <h2 class="section-title">Trusted Healthcare Provider Since 2010</h2>
+        <p class="section-subtitle">
+          At HealthCare Clinic, we combine medical excellence with compassionate
+          care. Our team of board-certified physicians and healthcare
+          professionals is dedicated to providing personalized treatment plans
+          for every patient.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="icon-box"><i class="fa-solid fa-award"></i></div>
+            <div>
+              <h4>Expert Doctors</h4>
+              <p>Board-certified physicians with years of experience</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="icon-box"><i class="fa-solid fa-users"></i></div>
+            <div>
+              <h4>10,000+ Patients</h4>
+              <p>Trusted by thousands of satisfied patients</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="icon-box"><i class="fa-regular fa-clock"></i></div>
+            <div>
+              <h4>24/7 Emergency</h4>
+              <p>Round-the-clock emergency medical services</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery section" id="gallery">
+    <div class="container">
+      <div class="section-center">
+        <p class="overline">Clinic Gallery</p>
+        <h2 class="section-title">A Warm, Modern Healing Space</h2>
+        <p class="section-subtitle">
+          Designed to provide comfort, trust, and peace of mind from the moment you arrive.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item gallery-1">
+          <img src="https://images.unsplash.com/photo-1771574204208-b47e2d863bc5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBtZWRpY2FsJTIwY2xpbmljJTIwaW50ZXJpb3IlMjBicmlnaHR8ZW58MHx8fHwxNzc1MzkzNjc4fDA&ixlib=rb-4.1.0&q=85" alt="Clinic waiting room">
+        </div>
+        <div class="gallery-item gallery-2">
+          <img src="https://images.pexels.com/photos/5827294/pexels-photo-5827294.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Medical equipment">
+        </div>
+        <div class="gallery-item gallery-3">
+          <img src="https://images.pexels.com/photos/7789620/pexels-photo-7789620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Examination room">
+        </div>
+        <div class="gallery-item gallery-4">
+          <img src="https://images.pexels.com/photos/6762866/pexels-photo-6762866.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Doctor portrait">
+        </div>
+        <div class="gallery-item gallery-5">
+          <img src="https://static.prod-images.emergentagent.com/jobs/028954cc-8890-4246-bb26-8e17e8340b0f/images/49f20c29ef47b9510ec03ea74db5a712352d98b899371d67a72922012963db63.png" alt="Reception area">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials section">
+    <div class="container">
+      <div class="section-center">
+        <p class="overline">Patient Testimonials</p>
+        <h2 class="section-title">What Our Patients Say</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">“The doctors were incredibly professional and the clinic environment felt calm, clean, and welcoming.”</p>
+          <p class="name">— Sarah Johnson</p>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">“Booking an appointment was simple and the staff were kind, efficient, and reassuring throughout.”</p>
+          <p class="name">— Michael Lee</p>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">“Excellent patient care and modern facilities. I felt genuinely listened to and cared for.”</p>
+          <p class="name">— Priya Sharma</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPOINTMENT -->
+  <section class="appointment section" id="appointment">
+    <div class="container appointment-grid">
+      <div>
+        <div class="info-card">
+          <div class="icon-box"><i class="fa-regular fa-clock"></i></div>
+          <div>
+            <h4>Opening Hours</h4>
+            <p>
+              Mon - Fri: 9:00 AM - 8:00 PM <br>
+              Saturday: 9:00 AM - 6:00 PM <br>
+              Sunday: 10:00 AM - 4:00 PM
+            </p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <h4>Location</h4>
+            <p>
+              123 Healthcare Avenue, <br>
+              Medical District, <br>
+              City, State 12345
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <form class="appointment-form" id="appointmentForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" placeholder="John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" placeholder="john@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" placeholder="+1 234 567 8900" required>
+          </div>
+
+          <div class="form-group">
+            <label>Select Service *</label>
+            <select required>
+              <option value="">Choose a service</option>
+              <option>General Consultation</option>
+              <option>Cardiology</option>
+              <option>Vaccination</option>
+              <option>Family Medicine</option>
+              <option>Diagnostic Services</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Date *</label>
+            <input type="date" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Additional Message (Optional)</label>
+            <textarea placeholder="Any specific concerns or questions?"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn">Book Appointment</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- EMERGENCY + CONTACT -->
+  <section class="emergency section" id="contact">
+    <div class="container emergency-grid">
+      <div>
+        <p class="overline">Emergency Support</p>
+        <h2 class="section-title">Need Immediate Medical Assistance?</h2>
+        <p>
+          Our team is here to support urgent care needs with compassion,
+          speed, and professional attention whenever you need us.
+        </p>
+
+        <div class="emergency-buttons">
+          <a href="tel:+911234567890" class="btn btn-emergency">
+            <i class="fa-solid fa-phone"></i> Emergency Call Now
+          </a>
+          <a href="https://wa.me/919999999999" target="_blank" class="btn btn-light">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <iframe
+          src="https://www.google.com/maps?q=Times%20Square,%20New%20York&z=14&output=embed"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>HealthCare Clinic</h3>
+          <p style="margin-top:18px;">
+            Providing compassionate, professional healthcare services to our
+            community since 2010.
+          </p>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Services</h4>
+          <ul>
+            <li>General Consultation</li>
+            <li>Cardiology</li>
+            <li>Vaccination</li>
+            <li>Diagnostic Services</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Connect With Us</h4>
+          <div class="socials">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2025 HealthCare Clinic. All rights reserved. Built for Future Interns Task 3.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      menuToggle.innerHTML = navMenu.classList.contains("active")
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    // Fake appointment submit
+    const form = document.getElementById("appointmentForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Appointment request submitted successfully!");
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
